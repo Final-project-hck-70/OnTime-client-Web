@@ -1,4 +1,4 @@
-export default function OvertimeReport() {
+export default function History() {
   return (
     <>
       <main className="  h-full  items-center justify-center  p-4   ">
@@ -50,9 +50,10 @@ export default function OvertimeReport() {
                 <thead>
                   <tr>
                     <th>Name</th>
-                    <th>date</th>
-                    <th>overtime duration</th>
-                    <th>reason for overtime</th>
+                    <th>From</th>
+                    <th>to</th>
+                    <th>location</th>
+                    <th>reason for leave</th>
                     <th>Action</th>
                   </tr>
                 </thead>

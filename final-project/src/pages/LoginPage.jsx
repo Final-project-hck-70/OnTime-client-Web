@@ -1,8 +1,8 @@
 export default function LoginPage() {
   return (
     <>
-      <form className="max-w-sm m-auto h-screen">
-        <div className="mb-5">
+      <form className="max-w-sm m-auto ">
+        <div className="">
           <label
             htmlFor="email"
             className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"

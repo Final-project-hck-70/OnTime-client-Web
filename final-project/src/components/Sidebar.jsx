@@ -1,8 +1,8 @@
 export default function Sidebar() {
   return (
     <>
-      <div class=" md:flex sm:hidden w-1/6  ">
-        <ul class="-my-2 divide-y divide-gray-100 ">
+      <div class=" md:flex sm:hidden w-full h-full  ">
+        <ul class="-my-2 divide-y divide-gray-100 w-full ">
           <li class="py-2">
             <ul class="space-y-1">
               <li>

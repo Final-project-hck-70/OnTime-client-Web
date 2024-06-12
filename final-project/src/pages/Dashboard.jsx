@@ -4,7 +4,7 @@ import Sidebar from "../components/Sidebar";
 export default function Dashboard() {
   return (
     <>
-      <main className="  h-screen  items-center justify-center bg-red-200 md:w-5/6   ">
+      <main className="    items-center justify-center bg-red-200    ">
         <section className="bg-blue-200 flex items-center justify-around  text-center p-4">
           <div className="grid grid-cols-2 w-screen gap-2">
             <div className="bg-gray-200  h-32 rounded-md ">
@@ -16,7 +16,7 @@ export default function Dashboard() {
           </div>
         </section>
 
-        <article className="bg-purple-300 h-screen p-4 ">
+        <article className="bg-purple-300 p-4 ">
           <div className="p-4  bg-white rounded-md h-svh sh">
             <h1>graphic total leaves and overtime this month</h1>
           </div>
