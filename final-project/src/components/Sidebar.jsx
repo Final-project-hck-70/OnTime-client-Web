@@ -1,48 +1,60 @@
+import { Link } from "react-router-dom";
+
 export default function Sidebar() {
   return (
     <>
-      <div class=" md:flex sm:hidden w-full h-full  ">
-        <ul class="-my-2 divide-y divide-gray-100 w-full ">
-          <li class="py-2">
-            <ul class="space-y-1">
+      <div className=" md:flex sm:hidden w-full bg-red-700 h-screen  text-white rounded-md sticky top-0">
+        <ul className="-my-2 divide-y divide-gray-100 w-full ">
+          <li className="py-2">
+            <ul className="space-y-1">
               <li>
-                <a
-                  href="#"
-                  class="block rounded-lg bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700"
+                <Link
+                  to="/"
+                  className="block rounded-lg  px-4 py-2 text-2xl font-bold  cursor-pointer "
+                >
+                  OnTime
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/"
+                  className="block rounded-lg  px-4 py-2 text-sm font-medium  cursor-pointer hover:bg-gray-100 hover:text-gray-700"
                 >
                   Dashboard
-                </a>
+                </Link>
               </li>
-              <li class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">
+              <li className="block rounded-lg px-4 py-2 text-sm font-medium  ">
                 <details className="">
-                  <summary>Report</summary>
+                  <summary className="cursor-pointer">Report</summary>
                   <ul className="p-2">
-                    <li class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">
-                      <a>Overtime</a>
+                    <li className="  block rounded-lg px-4 py-2 text-sm font-medium text-white hover:bg-gray-100 hover:text-black">
+                      <Link to="/report/overtimes" className="cursor-pointer">
+                        Overtime
+                      </Link>
                     </li>
-                    <li class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">
-                      <a>Leaves</a>
+                    <li className=" block rounded-lg px-4 py-2 text-sm font-medium text-white hover:bg-gray-100 hover:text-gray-700">
+                      <Link to="/report/leaves" className="cursor-pointer">
+                        Leaves
+                      </Link>
                     </li>
                   </ul>
                 </details>
               </li>
-
               <li>
-                <a
-                  href="#"
-                  class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
+                <Link
+                  to="/histories"
+                  className="block rounded-lg px-4 py-2 text-sm font-medium text-white hover:bg-gray-100 hover:text-black"
                 >
                   History
-                </a>
+                </Link>
               </li>
-
               <li>
-                <a
-                  href="#"
-                  class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
+                <Link
+                  to="/employees"
+                  className="block rounded-lg px-4 py-2 text-sm font-medium text-white hover:bg-gray-100 hover:text-black"
                 >
                   Employees
-                </a>
+                </Link>
               </li>
             </ul>
           </li>

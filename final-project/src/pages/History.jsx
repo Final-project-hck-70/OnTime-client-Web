@@ -2,7 +2,7 @@ export default function History() {
   return (
     <>
       <main className="  h-full  items-center justify-center  p-4   ">
-        <header className="bg-red-200 mb-6 p-2">
+        <header className="bg-white rounded-md shadow-2xl mb-6 p-2">
           <section>
             <h1 className="text-2xl font-bold">Overtime Report</h1>
             <p className="text-xs text-gray-700 font-md">
@@ -10,7 +10,7 @@ export default function History() {
             </p>
           </section>
         </header>
-        <main className=" bg-gray-300 p-4 ">
+        <main className=" bg-white shadow-xl rounded-md shadow-3xl p-4 ">
           <div className="flex justify-end  mb-6">
             <div className=" w-80 hidden lg:flex">
               <div className=" relative mx-auto  text-gray-600">

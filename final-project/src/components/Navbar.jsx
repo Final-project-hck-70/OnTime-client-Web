@@ -1,9 +1,15 @@
-import Sidebar from "./Sidebar";
+import Cookies from "js-cookie";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Navbar() {
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    Cookies.remove("token");
+    navigate("/login");
+  };
   return (
     <>
-      <div className="navbar bg-base-100 sticky top-0 z-40 ">
+      <div className="navbar bg-base-100  ">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost md:hidden">
@@ -27,32 +33,33 @@ export default function Navbar() {
               className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
             >
               <li>
-                <a>Dashboard</a>
+                <a className="cursor-pointer">Dashboard</a>
               </li>
               <li>
-                <a>Report</a>
+                <a className="cursor-pointer">Report</a>
                 <ul className="p-2">
                   <li>
-                    <a>Report Overtime</a>
+                    <a className="cursor-pointer">Report Overtime</a>
                   </li>
                   <li>
-                    <a>Report Cuti</a>
+                    <a className="cursor-pointer">Report Cuti</a>
                   </li>
                 </ul>
               </li>
               <li>
-                <a>History</a>
+                <a className="cursor-pointer">History</a>
               </li>
               <li>
-                <a>Employees</a>
+                <a className="cursor-pointer">Employees</a>
               </li>
             </ul>
           </div>
-          <a className="btn btn-ghost text-xl">OnTime</a>
         </div>
 
-        <div className="navbar-end mr-10">
-          <a className="btn">Logout</a>
+        <div className="navbar-end ">
+          <button className="btn" onClick={handleLogout}>
+            Logout
+          </button>
         </div>
       </div>
     </>

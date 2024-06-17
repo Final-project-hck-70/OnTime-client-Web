@@ -1,8 +1,10 @@
+import rejectButton from "../assets/x.png";
+
 export default function LeavesReport() {
   return (
     <>
-      <main className="  h-full  items-center justify-center  p-4   ">
-        <header className="bg-red-200 mb-6 p-2">
+      <main className="  h-screen  items-center justify-center  p-4   ">
+        <header className="bg-white rounded-md shadow-2xl mb-6 p-2">
           <section>
             <h1 className="text-2xl font-bold">Leaves Report</h1>
             <p className="text-xs text-gray-700 font-md">
@@ -10,7 +12,7 @@ export default function LeavesReport() {
             </p>
           </section>
         </header>
-        <main className=" bg-gray-300 p-4 ">
+        <main className="bg-white shadow-xl rounded-md shadow-3xl p-4 ">
           <div className="flex justify-end  mb-6">
             <div className=" w-80 hidden lg:flex">
               <div className=" relative mx-auto  text-gray-600">
@@ -22,7 +24,7 @@ export default function LeavesReport() {
                 />
                 <button
                   type="submit"
-                  className="absolute right-0 top-0 mt-5 mr-4"
+                  className="absolute right-0 top-0 mt-3 mr-4"
                 >
                   <svg
                     className="text-gray-600 h-4 w-4 fill-current"
@@ -49,11 +51,13 @@ export default function LeavesReport() {
               <table className="table table-xs">
                 <thead>
                   <tr>
+                    <th>No</th>
                     <th>Name</th>
                     <th>From</th>
-                    <th>to</th>
-                    <th>location</th>
-                    <th>reason for leave</th>
+                    <th>To</th>
+                    <th>Reason</th>
+                    <th>Delegate user</th>
+                    <th>Created at</th>
                     <th>Action</th>
                   </tr>
                 </thead>
@@ -64,192 +68,42 @@ export default function LeavesReport() {
                     <td>Quality Control Specialist</td>
                     <td>Littel, Schaden and Vandervort</td>
                     <td>Canada</td>
+                    <td>john doe</td>
                     <td>12/16/2020</td>
-                    <td>Blue</td>
-                  </tr>
-                  <tr>
-                    <th>2</th>
-                    <td>Hart Hagerty</td>
-                    <td>Desktop Support Technician</td>
-                    <td>Zemlak, Daniel and Leannon</td>
-                    <td>United States</td>
-                    <td>12/5/2020</td>
-                    <td>Purple</td>
-                  </tr>
-                  <tr>
-                    <th>3</th>
-                    <td>Brice Swyre</td>
-                    <td>Tax Accountant</td>
-                    <td>Carroll Group</td>
-                    <td>China</td>
-                    <td>8/15/2020</td>
-                    <td>Red</td>
-                  </tr>
-                  <tr>
-                    <th>4</th>
-                    <td>Marjy Ferencz</td>
-                    <td>Office Assistant I</td>
-                    <td>Rowe-Schoen</td>
-                    <td>Russia</td>
-                    <td>3/25/2021</td>
-                    <td>Crimson</td>
-                  </tr>
-                  <tr>
-                    <th>5</th>
-                    <td>Yancy Tear</td>
-                    <td>Community Outreach Specialist</td>
-                    <td>Wyman-Ledner</td>
-                    <td>Brazil</td>
-                    <td>5/22/2020</td>
-                    <td>Indigo</td>
-                  </tr>
-                  <tr>
-                    <th>6</th>
-                    <td>Irma Vasilik</td>
-                    <td>Editor</td>
-                    <td>Wiza, Bins and Emard</td>
-                    <td>Venezuela</td>
-                    <td>12/8/2020</td>
-                    <td>Purple</td>
-                  </tr>
-                  <tr>
-                    <th>7</th>
-                    <td>Meghann Durtnal</td>
-                    <td>Staff Accountant IV</td>
-                    <td>Schuster-Schimmel</td>
-                    <td>Philippines</td>
-                    <td>2/17/2021</td>
-                    <td>Yellow</td>
-                  </tr>
-                  <tr>
-                    <th>8</th>
-                    <td>Sammy Seston</td>
-                    <td>Accountant I</td>
-                    <td>O'Hara, Welch and Keebler</td>
-                    <td>Indonesia</td>
-                    <td>5/23/2020</td>
-                    <td>Crimson</td>
-                  </tr>
-                  <tr>
-                    <th>9</th>
-                    <td>Lesya Tinham</td>
-                    <td>Safety Technician IV</td>
-                    <td>Turner-Kuhlman</td>
-                    <td>Philippines</td>
-                    <td>2/21/2021</td>
-                    <td>Maroon</td>
-                  </tr>
-                  <tr>
-                    <th>10</th>
-                    <td>Zaneta Tewkesbury</td>
-                    <td>VP Marketing</td>
-                    <td>Sauer LLC</td>
-                    <td>Chad</td>
-                    <td>6/23/2020</td>
-                    <td>Green</td>
-                  </tr>
-                  <tr>
-                    <th>11</th>
-                    <td>Andy Tipple</td>
-                    <td>Librarian</td>
-                    <td>Hilpert Group</td>
-                    <td>Poland</td>
-                    <td>7/9/2020</td>
-                    <td>Indigo</td>
-                  </tr>
-                  <tr>
-                    <th>12</th>
-                    <td>Sophi Biles</td>
-                    <td>Recruiting Manager</td>
-                    <td>Gutmann Inc</td>
-                    <td>Indonesia</td>
-                    <td>2/12/2021</td>
-                    <td>Maroon</td>
-                  </tr>
-                  <tr>
-                    <th>13</th>
-                    <td>Florida Garces</td>
-                    <td>Web Developer IV</td>
-                    <td>Gaylord, Pacocha and Baumbach</td>
-                    <td>Poland</td>
-                    <td>5/31/2020</td>
-                    <td>Purple</td>
-                  </tr>
-                  <tr>
-                    <th>14</th>
-                    <td>Maribeth Popping</td>
-                    <td>Analyst Programmer</td>
-                    <td>Deckow-Pouros</td>
-                    <td>Portugal</td>
-                    <td>4/27/2021</td>
-                    <td>Aquamarine</td>
-                  </tr>
-                  <tr>
-                    <th>15</th>
-                    <td>Moritz Dryburgh</td>
-                    <td>Dental Hygienist</td>
-                    <td>Schiller, Cole and Hackett</td>
-                    <td>Sri Lanka</td>
-                    <td>8/8/2020</td>
-                    <td>Crimson</td>
-                  </tr>
-                  <tr>
-                    <th>16</th>
-                    <td>Reid Semiras</td>
-                    <td>Teacher</td>
-                    <td>Sporer, Sipes and Rogahn</td>
-                    <td>Poland</td>
-                    <td>7/30/2020</td>
-                    <td>Green</td>
-                  </tr>
-                  <tr>
-                    <th>17</th>
-                    <td>Alec Lethby</td>
-                    <td>Teacher</td>
-                    <td>Reichel, Glover and Hamill</td>
-                    <td>China</td>
-                    <td>2/28/2021</td>
-                    <td>Khaki</td>
-                  </tr>
-                  <tr>
-                    <th>18</th>
-                    <td>Aland Wilber</td>
-                    <td>Quality Control Specialist</td>
-                    <td>Kshlerin, Rogahn and Swaniawski</td>
-                    <td>Czech Republic</td>
-                    <td>9/29/2020</td>
-                    <td>Purple</td>
-                  </tr>
-                  <tr>
-                    <th>19</th>
-                    <td>Teddie Duerden</td>
-                    <td>Staff Accountant III</td>
-                    <td>Pouros, Ullrich and Windler</td>
-                    <td>France</td>
-                    <td>10/27/2020</td>
-                    <td>Aquamarine</td>
-                  </tr>
-                  <tr>
-                    <th>20</th>
-                    <td>Lorelei Blackstone</td>
-                    <td>Data Coordiator</td>
-                    <td>Witting, Kutch and Greenfelder</td>
-                    <td>Kazakhstan</td>
-                    <td>6/3/2020</td>
-                    <td>Red</td>
+                    <td>
+                      <td className="m-auto">
+                        <div className="flex gap-2 justify-center">
+                          <div
+                            data-tooltip-target="tooltip-default"
+                            className="bg-green-500 rounded-md shadow-2xl p-1 cursor-pointer"
+                          >
+                            <svg
+                              className="w-4 h-4  fill-white  "
+                              xmlns="http://www.w3.org/2000/svg"
+                              x="0px"
+                              y="0px"
+                              width="100"
+                              height="100"
+                              viewBox="0 0 50 50"
+                            >
+                              <path d="M 41.9375 8.625 C 41.273438 8.648438 40.664063 9 40.3125 9.5625 L 21.5 38.34375 L 9.3125 27.8125 C 8.789063 27.269531 8.003906 27.066406 7.28125 27.292969 C 6.5625 27.515625 6.027344 28.125 5.902344 28.867188 C 5.777344 29.613281 6.078125 30.363281 6.6875 30.8125 L 20.625 42.875 C 21.0625 43.246094 21.640625 43.410156 22.207031 43.328125 C 22.777344 43.242188 23.28125 42.917969 23.59375 42.4375 L 43.6875 11.75 C 44.117188 11.121094 44.152344 10.308594 43.78125 9.644531 C 43.410156 8.984375 42.695313 8.589844 41.9375 8.625 Z"></path>
+                            </svg>
+                          </div>
+                          <div
+                            data-tooltip-target="tooltip-default"
+                            className="bg-red-500 rounded-md shadow-2xl p-1 cursor-pointer"
+                          >
+                            <img
+                              className="w-4 h-4"
+                              src={rejectButton}
+                              alt=""
+                            />
+                          </div>
+                        </div>
+                      </td>
+                    </td>
                   </tr>
                 </tbody>
-                <tfoot>
-                  <tr>
-                    <th></th>
-                    <th>Name</th>
-                    <th>Job</th>
-                    <th>company</th>
-                    <th>location</th>
-                    <th>Last Login</th>
-                    <th>Favorite Color</th>
-                  </tr>
-                </tfoot>
               </table>
             </div>
           </div>

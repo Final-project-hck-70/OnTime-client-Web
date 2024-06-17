@@ -5,13 +5,15 @@ import Navbar from "./Navbar";
 export default function MainLayout() {
   return (
     <>
-      <Navbar />
-      <div className="flex h-full m-0 ">
-        <div className="bg-red-500 w-1/6">
+      <div className="flex h-full">
+        <div className=" w-1/6">
           <Sidebar />
         </div>
-        <div className="bg-blue-500 w-5/6">
-          <Outlet />
+        <div className="w-5/6">
+          <div>
+            <Navbar />
+            <Outlet />
+          </div>
         </div>
       </div>
     </>

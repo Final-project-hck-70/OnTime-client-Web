@@ -1,8 +1,8 @@
 export default function Employees() {
   return (
     <>
-      <main className="  h-full  items-center justify-center  p-4   ">
-        <header className="bg-red-200 mb-6 p-2">
+      <main className="  h-full  items-center justify-center  p-4 h-screen  ">
+        <header className="bg-white rounded-md shadow-2xl mb-6 p-2">
           <section>
             <h1 className="text-2xl font-bold">List of employees</h1>
             <p className="text-xs text-gray-700 font-md">
@@ -10,7 +10,7 @@ export default function Employees() {
             </p>
           </section>
         </header>
-        <main className=" bg-gray-300 p-4 ">
+        <main className=" bg-white shadow-xl rounded-md shadow-3xl p-4">
           <div className="flex justify-between  mb-6">
             <div>
               <div className="bg-blue-500 rounded-md text-white font-semibold shadow-2xl cursor-pointer hover:bg-blue-800 p-2">
