@@ -10,7 +10,7 @@ export default function Employees() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [selectedEmployee, setSelectedEmployee] = useState(null);
   const [newEmployee, setNewEmployee] = useState({
@@ -90,38 +90,12 @@ export default function Employees() {
     fetchProfile();
   }, []);
 
-  const openDeleteModal = (employee) => {
-    setSelectedEmployee(employee);
-    setIsDeleteModalOpen(true);
-  };
-
-  const closeDeleteModal = () => {
-    setSelectedEmployee(null);
-    setIsDeleteModalOpen(false);
-  };
-
   const openAddModal = () => {
     setIsAddModalOpen(true);
   };
 
   const closeAddModal = () => {
     setIsAddModalOpen(false);
-  };
-
-  const handleDelete = async () => {
-    if (!selectedEmployee) return;
-    try {
-      const token = Cookies.get("token");
-      await axios.delete(`http://localhost:3000/users/${selectedEmployee.id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      setEmployees(employees.filter((emp) => emp.id !== selectedEmployee.id));
-      closeDeleteModal();
-    } catch (error) {
-      setError("Failed to delete employee");
-    }
   };
 
   const handleAddEmployeeChange = (event) => {
@@ -201,7 +175,7 @@ export default function Employees() {
                       <th>{index + 1}</th>
                       <td>
                         <img
-                          className="rounded-full w-14 h-14 m-auto"
+                          className="rounded-md w-20 h-20 m-auto"
                           src={
                             employee.avaUrl || "https://via.placeholder.com/150"
                           }
@@ -213,18 +187,6 @@ export default function Employees() {
                       <td>{employee.position}</td>
                       <td className="m-auto">
                         <div className="flex gap-2 justify-center">
-                          <svg
-                            onClick={() => openDeleteModal(employee)}
-                            className="fill-red-700 w-4 h-4 cursor-pointer"
-                            xmlns="http://www.w3.org/2000/svg"
-                            x="0px"
-                            y="0px"
-                            width="100"
-                            height="100"
-                            viewBox="0 0 24 24"
-                          >
-                            <path d="M 10.806641 2 C 10.289641 2 9.7956875 2.2043125 9.4296875 2.5703125 L 9 3 L 4 3 A 1.0001 1.0001 0 1 0 4 5 L 20 5 A 1.0001 1.0001 0 1 0 20 3 L 15 3 L 14.570312 2.5703125 C 14.205312 2.2043125 13.710359 2 13.193359 2 L 10.806641 2 z M 4.3652344 7 L 5.8925781 20.263672 C 6.0245781 21.253672 6.877 22 7.875 22 L 16.123047 22 C 17.121047 22 17.974422 21.254859 18.107422 20.255859 L 19.634766 7 L 4.3652344 7 z"></path>
-                          </svg>
                           <Link to={`/employees/${employee.id}`}>
                             <svg
                               className="w-4 h-4 text-blue-600 dark:text-white"
@@ -257,78 +219,6 @@ export default function Employees() {
           </div>
         </main>
       </main>
-
-      {isDeleteModalOpen && (
-        <>
-          <div className="fixed inset-0 bg-black opacity-50 z-40"></div>
-          <div
-            id="popup-modal"
-            tabIndex="-1"
-            className="fixed inset-0 z-50 overflow-y-auto overflow-x-hidden flex items-center justify-center h-full w-full"
-          >
-            <div className="relative p-4 w-full max-w-md h-auto">
-              <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                <button
-                  type="button"
-                  className="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                  onClick={closeDeleteModal}
-                >
-                  <svg
-                    className="w-3 h-3"
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 14 14"
-                  >
-                    <path
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
-                    />
-                  </svg>
-                  <span className="sr-only">Close modal</span>
-                </button>
-                <div className="p-4 md:p-5 text-center">
-                  <svg
-                    className="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200"
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-                    />
-                  </svg>
-                  <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
-                    Are you sure you want to delete {selectedEmployee?.name}?
-                  </h3>
-                  <button
-                    onClick={handleDelete}
-                    type="button"
-                    className="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center"
-                  >
-                    Yes, I'm sure
-                  </button>
-                  <button
-                    onClick={closeDeleteModal}
-                    type="button"
-                    className="py-2.5 px-5 ml-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
-                  >
-                    No, cancel
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </>
-      )}
 
       {isAddModalOpen && profile && (
         <>

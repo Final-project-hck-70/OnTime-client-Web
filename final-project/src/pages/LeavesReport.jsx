@@ -2,11 +2,13 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import rejectButton from "../assets/x.png";
 import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
 
 export default function LeavesReport() {
   const [leaves, setLeaves] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchLeaves = async () => {
