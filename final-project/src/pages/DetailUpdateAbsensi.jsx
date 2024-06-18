@@ -6,42 +6,52 @@ import Cookies from "js-cookie";
 export default function DetailUpdateAbsensi() {
   const { id } = useParams();
   const navigate = useNavigate();
-
+  const [attendances, setAttendances] = useState([]);
   const [status, setStatus] = useState("");
   const [employee, setEmployee] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchEmployee = async () => {
+    const fetchAttendances = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/users/${id}`, {
+        const token = Cookies.get("token");
+        if (!token) {
+          setError("No token found, please log in.");
+          setLoading(false);
+          return;
+        }
+
+        const response = await axios.get("http://localhost:3000/attendances", {
           headers: {
-            Authorization: `Bearer ${Cookies.get("token")}`,
+            Authorization: `Bearer ${token}`,
           },
         });
-        setEmployee(response.data);
+        console.log(response);
+        setAttendances(response.data[0]);
         setLoading(false);
       } catch (error) {
-        setError("Failed to fetch employee data");
+        setError("Failed to fetch attendance data");
         setLoading(false);
       }
     };
 
-    fetchEmployee();
-  }, [id]);
+    fetchAttendances();
+  }, []);
 
-  const updateAttendanceStatus = async () => {
+  const updateAttendanceStatus = async (status) => {
     try {
-      await axios.patch(
+      const response = await axios.patch(
         `http://localhost:3000/attendances/update/${id}`,
-        { attendanceStatus: status },
+        { status: status },
         {
           headers: {
             Authorization: `Bearer ${Cookies.get("token")}`,
           },
         }
       );
+      console.log(response, "<<<<<<");
+      console.log(status, "<<<<<<");
       navigate("/histories");
     } catch (error) {
       setError("Failed to update attendance status");
@@ -54,7 +64,7 @@ export default function DetailUpdateAbsensi() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    updateAttendanceStatus();
+    updateAttendanceStatus(status);
   };
 
   if (loading) {
@@ -69,7 +79,7 @@ export default function DetailUpdateAbsensi() {
     <>
       <div className="p-6">
         <h3 className="mb-5 text-lg font-medium text-gray-900 dark:text-white">
-          Change status for {employee.name}
+          Change status for {attendances.attendanceStatus}
         </h3>
         <form onSubmit={handleSubmit}>
           <div className="mb-4 flex gap-2 flex-col">
@@ -86,7 +96,7 @@ export default function DetailUpdateAbsensi() {
                   type="radio"
                   value="On time"
                   name="status"
-                  checked={status === "On time"}
+                  defaultChecked={attendances.attendanceStatus === "On time"}
                   onChange={handleStatusChange}
                   className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                 />
@@ -104,7 +114,7 @@ export default function DetailUpdateAbsensi() {
                   type="radio"
                   value="Absent"
                   name="status"
-                  checked={status === "Absent"}
+                  defaultChecked={attendances.attendanceStatus === "Absent"}
                   onChange={handleStatusChange}
                   className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                 />
@@ -121,7 +131,7 @@ export default function DetailUpdateAbsensi() {
                   type="radio"
                   value="Late"
                   name="status"
-                  checked={status === "Late"}
+                  defaultChecked={attendances.attendanceStatus === "Late"}
                   onChange={handleStatusChange}
                   className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                 />

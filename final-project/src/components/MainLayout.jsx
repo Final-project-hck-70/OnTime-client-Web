@@ -5,7 +5,7 @@ import Navbar from "./Navbar";
 export default function MainLayout() {
   return (
     <>
-      <div className="flex h-full">
+      <div className="flex h-screen">
         <div className=" w-1/6">
           <Sidebar />
         </div>

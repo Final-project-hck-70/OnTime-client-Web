@@ -68,10 +68,10 @@ export default function Dashboard() {
             </div>
           </div>
         </section>
-        <div className="p-4  bg-white rounded-md h-svh shadow-2xl ">
+        {/* <div className="p-4  bg-white rounded-md h-svh shadow-2xl ">
           <h1>chart</h1>
           <ChartBar />
-        </div>
+        </div> */}
       </article>
     </>
   );
