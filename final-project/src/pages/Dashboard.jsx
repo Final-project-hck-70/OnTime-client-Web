@@ -16,7 +16,7 @@ export default function Dashboard() {
               <div className="absolute -inset-1 bg-gray-400 blur opacity-40 group-hover:opacity-60 transition duration-1000 group-hover:duration-200" />
               <div className="relative px-7 py-6 bg-purple-600 ring-1 ring-gray-900/5 rounded-lg leading-none flex items-top justify-start space-x-6">
                 <img
-                  className=" bg-white p-2 shadow-5xl rounded-full  w-16 h-16 my-auto"
+                  className=" bg-white p-2 shadow-5xld w-16 h-16 my-auto"
                   src={leaveImg}
                   alt="a"
                 />

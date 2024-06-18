@@ -1,9 +1,69 @@
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import rejectButton from "../assets/x.png";
+import Cookies from "js-cookie";
 
 export default function LeavesReport() {
+  const [leaves, setLeaves] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchLeaves = async () => {
+      try {
+        const response = await axios.get("http://localhost:3000/leaves", {
+          headers: {
+            Authorization: `Bearer ${Cookies.get("token")}`,
+          },
+        });
+        console.log(response);
+        setLeaves(response.data);
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+        setError("Failed to fetch leave data");
+        setLoading(false);
+      }
+    };
+
+    fetchLeaves();
+  }, []);
+
+  const updateLeaveStatus = async (id, status) => {
+    try {
+      const response = await axios.patch(
+        `http://localhost:3000/leaves/${id}`,
+        { leaveStatus: status },
+        {
+          headers: {
+            Authorization: `Bearer ${Cookies.get("token")}`,
+          },
+        }
+      );
+      const updatedLeave = response.data;
+      setLeaves(
+        leaves.map((leave) =>
+          leave.id === updatedLeave.id ? updatedLeave : leave
+        )
+      );
+      window.location.reload();
+    } catch (error) {
+      console.log(error);
+      setError("Failed to update leave status");
+    }
+  };
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+
+  if (error) {
+    return <p>{error}</p>;
+  }
+
   return (
     <>
-      <main className="  h-screen  items-center justify-center  p-4   ">
+      <main className="h-screen items-center justify-center p-4">
         <header className="bg-white rounded-md shadow-2xl mb-6 p-2">
           <section>
             <h1 className="text-2xl font-bold">Leaves Report</h1>
@@ -12,12 +72,12 @@ export default function LeavesReport() {
             </p>
           </section>
         </header>
-        <main className="bg-white shadow-xl rounded-md shadow-3xl p-4 ">
-          <div className="flex justify-end  mb-6">
-            <div className=" w-80 hidden lg:flex">
-              <div className=" relative mx-auto  text-gray-600">
+        <main className="bg-white shadow-xl rounded-md p-4">
+          <div className="flex justify-end mb-6">
+            <div className="w-80 hidden lg:flex">
+              <div className="relative mx-auto text-gray-600">
                 <input
-                  className="border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none w-80 "
+                  className="border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none w-80"
                   type="search"
                   name="search"
                   placeholder="Search"
@@ -57,52 +117,59 @@ export default function LeavesReport() {
                     <th>To</th>
                     <th>Reason</th>
                     <th>Delegate user</th>
-                    <th>Created at</th>
+                    <th>Status</th>
                     <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <th>1</th>
-                    <td>Cy Ganderton</td>
-                    <td>Quality Control Specialist</td>
-                    <td>Littel, Schaden and Vandervort</td>
-                    <td>Canada</td>
-                    <td>john doe</td>
-                    <td>12/16/2020</td>
-                    <td>
-                      <td className="m-auto">
-                        <div className="flex gap-2 justify-center">
-                          <div
-                            data-tooltip-target="tooltip-default"
-                            className="bg-green-500 rounded-md shadow-2xl p-1 cursor-pointer"
-                          >
-                            <svg
-                              className="w-4 h-4  fill-white  "
-                              xmlns="http://www.w3.org/2000/svg"
-                              x="0px"
-                              y="0px"
-                              width="100"
-                              height="100"
-                              viewBox="0 0 50 50"
+                  {leaves.map((leave, index) => (
+                    <tr key={leave.id}>
+                      <th>{index + 1}</th>
+                      <td>{leave.User.name}</td>
+                      <td>{new Date(leave.from).toLocaleDateString()}</td>
+                      <td>{new Date(leave.to).toLocaleDateString()}</td>
+                      <td>{leave.reason}</td>
+                      <td>{leave.DelegateUser.name}</td>
+                      <td>{leave.leaveStatus}</td>
+                      <td>
+                        {leave.leaveStatus === "Pending" ||
+                        leave.leaveStatus === null ? (
+                          <div className="flex gap-2 justify-center">
+                            <div
+                              className="bg-green-500 rounded-md shadow-2xl p-1 cursor-pointer"
+                              onClick={() =>
+                                updateLeaveStatus(leave.id, "Accepted")
+                              }
                             >
-                              <path d="M 41.9375 8.625 C 41.273438 8.648438 40.664063 9 40.3125 9.5625 L 21.5 38.34375 L 9.3125 27.8125 C 8.789063 27.269531 8.003906 27.066406 7.28125 27.292969 C 6.5625 27.515625 6.027344 28.125 5.902344 28.867188 C 5.777344 29.613281 6.078125 30.363281 6.6875 30.8125 L 20.625 42.875 C 21.0625 43.246094 21.640625 43.410156 22.207031 43.328125 C 22.777344 43.242188 23.28125 42.917969 23.59375 42.4375 L 43.6875 11.75 C 44.117188 11.121094 44.152344 10.308594 43.78125 9.644531 C 43.410156 8.984375 42.695313 8.589844 41.9375 8.625 Z"></path>
-                            </svg>
+                              <svg
+                                className="w-4 h-4 fill-white"
+                                xmlns="http://www.w3.org/2000/svg"
+                                x="0px"
+                                y="0px"
+                                width="100"
+                                height="100"
+                                viewBox="0 0 50 50"
+                              >
+                                <path d="M 41.9375 8.625 C 41.273438 8.648438 40.664063 9 40.3125 9.5625 L 21.5 38.34375 L 9.3125 27.8125 C 8.789063 27.269531 8.003906 27.066406 7.28125 27.292969 C 6.5625 27.515625 6.027344 28.125 5.902344 28.867188 C 5.777344 29.613281 6.078125 30.363281 6.6875 30.8125 L 20.625 42.875 C 21.0625 43.246094 21.640625 43.410156 22.207031 43.328125 C 22.777344 43.242188 23.28125 42.917969 23.59375 42.4375 L 43.6875 11.75 C 44.117188 11.121094 44.152344 10.308594 43.78125 9.644531 C 43.410156 8.984375 42.695313 8.589844 41.9375 8.625 Z"></path>
+                              </svg>
+                            </div>
+                            <div
+                              className="bg-red-500 rounded-md shadow-2xl p-1 cursor-pointer"
+                              onClick={() =>
+                                updateLeaveStatus(leave.id, "Rejected")
+                              }
+                            >
+                              <img
+                                className="w-4 h-4"
+                                src={rejectButton}
+                                alt="Reject"
+                              />
+                            </div>
                           </div>
-                          <div
-                            data-tooltip-target="tooltip-default"
-                            className="bg-red-500 rounded-md shadow-2xl p-1 cursor-pointer"
-                          >
-                            <img
-                              className="w-4 h-4"
-                              src={rejectButton}
-                              alt=""
-                            />
-                          </div>
-                        </div>
+                        ) : null}
                       </td>
-                    </td>
-                  </tr>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>
