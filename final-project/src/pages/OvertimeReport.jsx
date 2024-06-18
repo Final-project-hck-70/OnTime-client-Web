@@ -10,34 +10,34 @@ export default function OvertimeReport() {
   const [month, setMonth] = useState("");
   const [year, setYear] = useState("");
 
-  useEffect(() => {
-    const fetchOvertimes = async () => {
-      try {
-        const token = Cookies.get("token");
-        if (!token) {
-          setError("No token found, please log in.");
-          setLoading(false);
-          return;
-        }
-
-        const response = await axios.get("http://localhost:3000/overtimes", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-          params: {
-            month,
-            year,
-          },
-        });
-
-        setOvertimes(response.data);
+  const fetchOvertimes = async () => {
+    try {
+      const token = Cookies.get("token");
+      if (!token) {
+        setError("No token found, please log in.");
         setLoading(false);
-      } catch (error) {
-        setError("Failed to fetch overtime data");
-        setLoading(false);
+        return;
       }
-    };
 
+      const response = await axios.get("http://localhost:3000/overtimes", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        params: {
+          month,
+          year,
+        },
+      });
+
+      setOvertimes(response.data);
+      setLoading(false);
+    } catch (error) {
+      setError("Failed to fetch overtime data");
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
     fetchOvertimes();
   }, [month, year]);
 
@@ -53,15 +53,8 @@ export default function OvertimeReport() {
           },
         }
       );
-      const updatedOvertime = response.data;
-      setOvertimes(
-        overtimes.map((overtime) =>
-          overtime.id === updatedOvertime.id ? updatedOvertime : overtime
-        )
-      );
-      setTimeout(() => {
-        window.location.reload(); // Refresh the page after a short delay
-      }, 100); // Adjust the delay as needed
+
+      fetchOvertimes();
     } catch (error) {
       console.log(error);
       setError("Failed to update overtime status");

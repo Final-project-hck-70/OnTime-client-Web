@@ -24,34 +24,32 @@ export default function Employees() {
   });
 
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const fetchEmployees = async () => {
-      try {
-        const token = Cookies.get("token");
-        if (!token) {
-          setError("No token found, please log in.");
-          setLoading(false);
-          return;
-        }
-
-        const response = await axios.get("http://localhost:3000/users", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-          params: {
-            name: searchTerm,
-          },
-        });
-
-        setEmployees(response.data);
+  const fetchEmployees = async () => {
+    try {
+      const token = Cookies.get("token");
+      if (!token) {
+        setError("No token found, please log in.");
         setLoading(false);
-      } catch (error) {
-        setError("Failed to fetch employee data");
-        setLoading(false);
+        return;
       }
-    };
 
+      const response = await axios.get("http://localhost:3000/users", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        params: {
+          name: searchTerm,
+        },
+      });
+
+      setEmployees(response.data);
+      setLoading(false);
+    } catch (error) {
+      setError("Failed to fetch employee data");
+      setLoading(false);
+    }
+  };
+  useEffect(() => {
     fetchEmployees();
   }, [searchTerm]);
 
@@ -119,9 +117,13 @@ export default function Employees() {
           },
         }
       );
-      setEmployees([...employees, response.data]);
+      // setEmployees([...employees, response.data]);
+
       navigate("/employees");
+      closeAddModal();
+      fetchEmployees();
     } catch (error) {
+      console.log(error);
       toast(error.response.data.message);
     }
   };
@@ -229,7 +231,7 @@ export default function Employees() {
             className="fixed inset-0 z-50 overflow-y-auto overflow-x-hidden flex items-center justify-center h-full w-full"
           >
             <div className="relative p-4 w-full max-w-md h-auto">
-              <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
+              <div className="relative mt-20 bg-white rounded-lg shadow dark:bg-gray-700">
                 <button
                   type="button"
                   className="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"

@@ -10,24 +10,24 @@ export default function LeavesReport() {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchLeaves = async () => {
-      try {
-        const response = await axios.get("http://localhost:3000/leaves", {
-          headers: {
-            Authorization: `Bearer ${Cookies.get("token")}`,
-          },
-        });
-        console.log(response);
-        setLeaves(response.data);
-        setLoading(false);
-      } catch (error) {
-        console.log(error);
-        setError("Failed to fetch leave data");
-        setLoading(false);
-      }
-    };
+  const fetchLeaves = async () => {
+    try {
+      const response = await axios.get("http://localhost:3000/leaves", {
+        headers: {
+          Authorization: `Bearer ${Cookies.get("token")}`,
+        },
+      });
+      console.log(response);
+      setLeaves(response.data);
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+      setError("Failed to fetch leave data");
+      setLoading(false);
+    }
+  };
 
+  useEffect(() => {
     fetchLeaves();
   }, []);
 
@@ -42,13 +42,8 @@ export default function LeavesReport() {
           },
         }
       );
-      const updatedLeave = response.data;
-      setLeaves(
-        leaves.map((leave) =>
-          leave.id === updatedLeave.id ? updatedLeave : leave
-        )
-      );
-      window.location.reload();
+
+      fetchLeaves();
     } catch (error) {
       console.log(error);
       setError("Failed to update leave status");
