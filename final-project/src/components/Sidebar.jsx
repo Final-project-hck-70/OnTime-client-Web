@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 export default function Sidebar() {
   return (
     <>
-      <div className=" md:flex sm:hidden w-full bg-red-700 h-screen  text-white rounded-md sticky top-0">
+      <div className=" md:flex sm:hidden w-full bg-red-700 h-screen  text-white rounded-r-lg sticky top-0">
         <ul className="-my-2 divide-y divide-gray-100 w-full ">
           <li className="py-2">
             <ul className="space-y-1">

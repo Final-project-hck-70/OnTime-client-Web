@@ -138,7 +138,7 @@ export default function Employees() {
 
   return (
     <>
-      <main className="h-full items-center justify-center p-4 h-screen">
+      <main className=" items-center justify-center p-4 ">
         <header className="bg-white rounded-md shadow-2xl mb-6 p-2">
           <section>
             <h1 className="text-2xl font-bold">List of employees</h1>
