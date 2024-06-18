@@ -13,6 +13,7 @@ import Employees from "./pages/Employees";
 import AddEmployee from "./pages/AddEmployee";
 import DetailEmployee from "./pages/DetailEmployee";
 import Cookies from "js-cookie";
+import DetailUpdateAbsensi from "./pages/DetailUpdateAbsensi";
 
 function App() {
   const router = createBrowserRouter([
@@ -42,6 +43,7 @@ function App() {
         { path: "/employees", element: <Employees /> },
         { path: "/employees/add-employees", element: <AddEmployee /> },
         { path: "/employees/:id", element: <DetailEmployee /> },
+        { path: "/histories/:id", element: <DetailUpdateAbsensi /> },
       ],
     },
   ]);

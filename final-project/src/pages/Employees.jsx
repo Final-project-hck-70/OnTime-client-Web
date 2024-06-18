@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 
 export default function Employees() {
   const [employees, setEmployees] = useState([]);
+  const [profile, setProfile] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
@@ -17,11 +19,12 @@ export default function Employees() {
     password: "",
     phoneNumber: "",
     image: "",
-    company: "", // Change this to CompanyId
+    company: "",
     position: "",
   });
 
   const companyOptions = [{ id: 1, name: "Tech Innovators Inc." }];
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchEmployees = async () => {
@@ -51,11 +54,37 @@ export default function Employees() {
     };
 
     fetchEmployees();
-  }, [searchTerm]);
+  }, []);
 
-  const handleSearchChange = (event) => {
-    setSearchTerm(event.target.value);
-  };
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const token = Cookies.get("token");
+        if (!token) {
+          setError("No token found, please log in.");
+          setLoading(false);
+          return;
+        }
+
+        const response = await axios.get(
+          "http://localhost:3000/users/profile/me",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        setProfile(response.data);
+        setLoading(false);
+      } catch (error) {
+        setError("Failed to fetch employee data");
+        setLoading(false);
+      }
+    };
+
+    fetchProfile();
+  }, []);
 
   const openDeleteModal = (employee) => {
     setSelectedEmployee(employee);
@@ -113,9 +142,10 @@ export default function Employees() {
         }
       );
       setEmployees([...employees, response.data]);
-      closeAddModal();
+      navigate("/employees");
     } catch (error) {
-      setError("Failed to add employee");
+      console.log(error);
+      toast(error.response.data.message);
     }
   };
 

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import Cookies from "js-cookie";
+import editLogo from "../assets/edit-3-svgrepo-com.svg";
 
 export default function History() {
   const [attendances, setAttendances] = useState([]);
@@ -120,6 +122,7 @@ export default function History() {
                     <th>Clock In</th>
                     <th>Clock Out</th>
                     <th>Status</th>
+                    <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -135,6 +138,49 @@ export default function History() {
                           : "N/A"}
                       </td>
                       <td>{attendance.attendanceStatus}</td>
+                      <td className="m-auto">
+                        <div className="flex gap-2 justify-center">
+                          <Link to={`/employees/${attendance.UserId}`}>
+                            <svg
+                              className="w-4 h-4 text-blue-600 dark:text-white"
+                              aria-hidden="true"
+                              xmlns="http://www.w3.org/1999/xlink"
+                              width="24"
+                              height="24"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                stroke="currentColor"
+                                stroke-width="2"
+                                d="M21 12c0 1.2-4.03 6-9 6s-9-4.8-9-6c0-1.2 4.03-6 9-6s9 4.8 9 6Z"
+                              />
+                              <path
+                                stroke="currentColor"
+                                stroke-width="2"
+                                d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+                              />
+                            </svg>
+                          </Link>
+                          <Link to={`/histories/${attendance.UserId}`}>
+                            <svg
+                              className="w-4 h-4 text-blue-600 dark:text-white"
+                              fill="none"
+                              height="24"
+                              stroke="currentColor"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              viewBox="0 0 24 24"
+                              width="24"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+                              <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+                            </svg>
+                          </Link>
+                        </div>
+                      </td>
                     </tr>
                   ))}
                 </tbody>

@@ -131,7 +131,7 @@ export default function OvertimeReport() {
                     <th>Overtime Duration</th>
                     <th>Reason</th>
                     <th>Delegate user</th>
-                    <th>Created at</th>
+                    <th>Status</th>
                     <th>Action</th>
                   </tr>
                 </thead>
