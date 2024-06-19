@@ -78,6 +78,7 @@ export default function Employees() {
           ...prevState,
           company: profileData.CompanyId,
         }));
+        console.log(profileData);
         setLoading(false);
       } catch (error) {
         setError("Failed to fetch profile data");
@@ -119,7 +120,7 @@ export default function Employees() {
       );
       // setEmployees([...employees, response.data]);
 
-      navigate("/employees");
+      // navigate("/employees");
       closeAddModal();
       fetchEmployees();
     } catch (error) {
@@ -201,12 +202,12 @@ export default function Employees() {
                             >
                               <path
                                 stroke="currentColor"
-                                stroke-width="2"
+                                strokeWidth="2"
                                 d="M21 12c0 1.2-4.03 6-9 6s-9-4.8-9-6c0-1.2 4.03-6 9-6s9 4.8 9 6Z"
                               />
                               <path
                                 stroke="currentColor"
-                                stroke-width="2"
+                                strokeWidth="2"
                                 d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
                               />
                             </svg>

@@ -107,9 +107,12 @@ export default function Dashboard() {
             <img className="rounded-md w-40 h-40" src={profile.avaUrl} alt="" />
             <div className="m-4">
               <h1 className="font-bold text-xl">{profile.name}</h1>
+
               <div className="mt-4">
+                <h1 className="font-semibold text-md">
+                  {profile.Company.name}
+                </h1>
                 <h1 className="font-semibold text-md">{profile.position}</h1>
-                <h1>{profile.email}</h1>
               </div>
             </div>
           </>

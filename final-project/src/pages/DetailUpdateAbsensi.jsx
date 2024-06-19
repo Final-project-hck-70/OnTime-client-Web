@@ -27,8 +27,8 @@ export default function DetailUpdateAbsensi() {
             Authorization: `Bearer ${token}`,
           },
         });
-        console.log(response);
-        setAttendances(response.data[0]);
+        // console.log(response);
+        // setAttendances(response.data[0]);
         setLoading(false);
       } catch (error) {
         setError("Failed to fetch attendance data");
@@ -50,7 +50,7 @@ export default function DetailUpdateAbsensi() {
           },
         }
       );
-      console.log(response, "<<<<<<");
+      console.log(response, "<<<<<< ini response");
       console.log(status, "<<<<<<");
       navigate("/histories");
     } catch (error) {
@@ -145,13 +145,13 @@ export default function DetailUpdateAbsensi() {
             </div>
           </div>
           <div className="flex flex-col gap-2 ">
+            <button
+              type="submit"
+              className="w-full  text-white border bg-blue-500 hover:bg-blue-800 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            >
+              Update
+            </button>
             <Link to="/histories">
-              <button
-                type="submit"
-                className="w-full  text-white border bg-blue-500 hover:bg-blue-800 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-              >
-                Update
-              </button>
               <button
                 type="button"
                 className="mt-4 w-full text-blue-500 border border-blue-500 hover:bg-blue-600 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
